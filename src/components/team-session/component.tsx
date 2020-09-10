@@ -49,6 +49,11 @@ const TeamSession: React.FC<Props> = ({ team }) => {
     };
   }, [updateUserSession, userId]);
 
+
+  console.log(teamSession)
+  console.log('ENTRY ID', teamSession?.team_by_pk.entry?.id)
+  // console.log(teamSession?.team_by_pk.entry?.image.original_url) 
+
   return (
     <div
       className="grid h-screen bg-black grid-rows-12"
@@ -89,8 +94,8 @@ const TeamSession: React.FC<Props> = ({ team }) => {
                 <p className="text-lg text-white">{teamSession?.team_by_pk.entry?.user.name}</p>
               </div>
             ) : (
-              <p className="font-bold text-center text-white">Starting soon...</p>
-            )}
+                <p className="font-bold text-center text-white">Starting soon...</p>
+              )}
           </header>
 
           <ul className="flex-1 py-4 space-y-4 overflow-auto scrolling-touch">
@@ -126,7 +131,6 @@ const TeamSession: React.FC<Props> = ({ team }) => {
             }
             alt="GIF"
           />
-
           <div className="flex flex-col items-center flex-shrink-0 space-y-1 lg:hidden">
             <img
               src={teamSession?.team_by_pk.entry?.user.picture}
