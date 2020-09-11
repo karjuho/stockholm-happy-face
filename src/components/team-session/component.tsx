@@ -6,6 +6,7 @@ import LogoIcon from 'components/logo-icon';
 import useTeamSessionSubscription from 'graphql/subscriptions/team-session';
 import useUpdateUserSessionMutation from 'graphql/mutations/update-user-session';
 import { useUserId } from 'hooks';
+import { Picker } from 'emoji-mart';
 
 interface Props {
   team: number;
@@ -52,7 +53,6 @@ const TeamSession: React.FC<Props> = ({ team }) => {
 
   console.log(teamSession)
   console.log('ENTRY ID', teamSession?.team_by_pk.entry?.id)
-  // console.log(teamSession?.team_by_pk.entry?.image.original_url) 
 
   return (
     <div
@@ -112,6 +112,7 @@ const TeamSession: React.FC<Props> = ({ team }) => {
           </ul>
 
           <footer className="flex items-end p-2 border-t border-white border-opacity-10">
+
             <button
               onClick={handleClickOpenAdminPopup}
               className="flex items-center justify-center w-full h-12 px-4 space-x-2 text-base text-white rounded-lg hover:bg-opacity-10 hover:bg-white"
@@ -119,6 +120,9 @@ const TeamSession: React.FC<Props> = ({ team }) => {
               <FiExternalLink size="20" />
               <p>Open admin controls</p>
             </button>
+            <div className="reactions">
+              <Picker />
+            </div>
           </footer>
         </aside>
 

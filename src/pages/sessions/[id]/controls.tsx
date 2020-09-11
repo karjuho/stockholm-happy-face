@@ -62,29 +62,29 @@ const SessionControlsPage: NextPage = () => {
                 </p>
               </li>
             ) : (
-              <li
-                key={item.id}
-                className="flex items-center justify-between h-12 px-4 text-lg font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-25 group"
-              >
-                <p className="flex items-center space-x-2">
-                  <span>
-                    {item.user.name}{' '}
-                    {!usersInSession?.includes(item.user.id) && (
-                      <span className="text-white text-opacity-50">(not here)</span>
-                    )}
-                  </span>
-                  {item.presented && <FiCheck />}
-                </p>
-                <button
-                  onClick={(): void => {
-                    presentEntry(item.id);
-                  }}
-                  className="text-base uppercase transition-opacity duration-150 opacity-0 group-hover:opacity-100"
+                <li
+                  key={item.id}
+                  className="flex items-center justify-between h-12 px-4 text-lg font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-25 group"
                 >
-                  Show
+                  <p className="flex items-center space-x-2">
+                    <span>
+                      {item.user.name}{' '}
+                      {!usersInSession?.includes(item.user.id) && (
+                        <span className="text-white text-opacity-50">(not here)</span>
+                      )}
+                    </span>
+                    {item.presented && <FiCheck />}
+                  </p>
+                  <button
+                    onClick={(): void => {
+                      presentEntry(item.id);
+                    }}
+                    className="text-base uppercase transition-opacity duration-150 opacity-0 group-hover:opacity-100"
+                  >
+                    Show
                 </button>
-              </li>
-            ),
+                </li>
+              ),
           )}
           {presentUsersWithoutEntry?.map((item) => (
             <li
