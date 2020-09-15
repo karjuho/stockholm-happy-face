@@ -46,3 +46,9 @@ export function getEndOfWeek(): Date {
   date.setHours(23, 59, 59, 0);
   return date;
 }
+
+export function getTimestampTenSecondsPrior(): Date {
+  const time = new Date();
+  time.setSeconds(time.getSeconds() - 10);
+  return time;
+}
