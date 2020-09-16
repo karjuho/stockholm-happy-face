@@ -72,10 +72,8 @@ const SessionControlsPage: NextPage = () => {
                 >
                   <p className="flex items-center space-x-2">
                     <span>
-                      {item.user.name}
-                      
-                      {!usersInSession?.includes(item.user.id) && 
-                       
+                      {item.user.name}{' '}
+                      {!usersIdsInSession?.includes(item.user.id) && (
                         <span className="text-white text-opacity-50">(not here)</span>
                       )}
                     </span>
@@ -88,7 +86,7 @@ const SessionControlsPage: NextPage = () => {
                     className="text-base uppercase transition-opacity duration-150 opacity-0 group-hover:opacity-100"
                   >
                     Show
-                </button>
+                  </button>
                 </li>
               ),
           )}
