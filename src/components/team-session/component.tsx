@@ -5,6 +5,8 @@ import Link from 'next/link';
 import LogoIcon from 'components/logo-icon';
 import useTeamSessionSubscription from 'graphql/subscriptions/team-session';
 import useUpdateUserSessionMutation from 'graphql/mutations/update-user-session';
+import useUpdateOnlineUserMutation from 'graphql/mutations/update-online-user';
+import useOnlineUsers from 'graphql/subscriptions/online-users';
 import { useUserId } from 'hooks';
 import { Picker, EmojiProps } from 'emoji-mart';
 import useInsertReactionMutation from 'graphql/mutations/insert-reaction';
@@ -53,6 +55,25 @@ const TeamSession: React.FC<Props> = ({ team }) => {
     };
   }, [updateUserSession, userId]);
 
+  const activeUsers = useOnlineUsers(team);
+  const onlineUsers = activeUsers ? activeUsers.online_team_users : [];
+
+  const [updateOnlineUser] = useUpdateOnlineUserMutation();
+  useEffect(() => {
+    const emitOnlineInterval = setInterval(
+      async () => {
+        await updateOnlineUser({
+          variables: { user: userId },
+        });
+      },
+      3000
+    );
+    return () => {
+      clearInterval(emitOnlineInterval);
+    }
+  }, [updateOnlineUser, userId]);
+
+  
   const [emojiPickerState, setEmojiPicker] = useState(false);
   const [addReaction] = useInsertReactionMutation();
 
@@ -112,7 +133,7 @@ const TeamSession: React.FC<Props> = ({ team }) => {
           </header>
 
           <ul className="flex-1 py-4 space-y-4 overflow-auto scrolling-touch">
-            {teamSession?.team_by_pk.participants
+            {teamSession && onlineUsers
               .filter((item) => item.id !== teamSession.team_by_pk.entry?.user.id)
               .map((item) => (
                 <li key={item.id} className="flex items-center px-4 space-x-4">
